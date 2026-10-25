@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xomaSMP 🐹 — лучший смп сервер хомячков</title>
+<style>
+  /* Стили оставляем как были, они рабочие */
+  :root { --bg: #10101c; --text: #e8e8f0; --accent: #f7af1b; --card: #1a1a2c; --card-border: #2a2a44; }
+  body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
+  header { display: flex; justify-content: space-between; padding: 20px 30px; flex-wrap: wrap; }
+  .logo h1 { margin: 0; font-size: 34px; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 20px 30px 60px; }
+  section { background: var(--card); border: 2px solid var(--card-border); border-radius: 14px; padding: 26px 30px; margin-top: 35px; }
+  h2 { color: var(--accent); }
+  .rule { border-left: 4px solid var(--accent); padding-left: 10px; margin: 10px 0; }
+  .news-item { background: #232340; padding: 15px; border-radius: 8px; margin-bottom: 10px; }
+  .date { color: #9a9ab0; font-size: 0.8rem; }
+  footer { text-align: center; padding: 30px; color: #9a9ab0; }
+  a { color: var(--accent); }
+  .windows { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+  .win { background: var(--card); border: 1px solid var(--card-border); padding: 20px; border-radius: 10px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <h1>xomaSMP <span class="pick">⛏️🐹</span></h1>
+  </div>
+  <div class="server-info">
+    <div>Онлайн: <b id="online">…</b></div>
+    <div>Айпи: <b>tt.xomasmp.fun</b></div>
+    <div>Версия: 1.21.11</div>
+    <div style="font-size: 0.8rem; margin-top: 5px;"><a href="index.html" style="color: #666; text-decoration: none;">← Назад к соглашению</a></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Обновлённые новости -->
+  <section id="news">
+    <h2>📢 Новости</h2>
+    <div class="news-item">
+      <div class="date">25.10.2026</div>
+      <p>У нас прошёл <b>Вайп Номер 3</b>! Мы обновили карту, инвентари и позиции игроков.</p>
+    </div>
+    <div class="news-item">
+      <div class="date">25.10.2026</div>
+      <p>Мы немного изменили структуру сайта и добавили страницу соглашения.</p>
+    </div>
+    <div class="news-item">
+      <div class="date">18.10.2026</div>
+      <p>Наш сайт теперь общедоступен! 🎉</p>
+    </div>
+  </section>
+
+  <!-- Обновлённые вайпы -->
+  <section id="gameplay">
+    <h2>🔄 Вайпы</h2>
+    <p><b>Вайп №1 (глобальный вайп) — 28.08.26</b></p>
+    <p><b>Вайп №2 (глобальный) — 4.10.26</b></p>
+    <div class="rule">
+      <p><b>Вайп Номер 3 — 25.10.2026</b></p>
+      <p>Мы обновили карту, инвентари и позиции игроков.</p>
+      <p>📅 Следующий глобальный вайп планируется — <b>01.01.2027</b> (может и раньше).</p>
+    </div>
+  </section>
+
+  <!-- Почётные игроки -->
+  <section id="honor">
+    <h2>🏅 Почётные игроки</h2>
+    <h3>Клан «Ахае»</h3>
+    <ul>
+      <li>Bahha</li>
+      <li>carabaska</li>
+      <li>rusering</li>
+    </ul>
+  </section>
+
+  <!-- Модераторы -->
+  <section id="staff">
+    <h2>👑 Администрация</h2>
+    <ul>
+      <li><b>Создатель:</b> MrXomaOff</li>
+      <li><b>Модераторы:</b> Danil2025</li>
+    </ul>
+  </section>
+
+  <!-- Остальное можно оставить как было (правила, донат и т.д.) -->
+  <!-- ... твой старый код для правил и доната ... -->
+
+</div>
+
+<footer>
+  xomaSMP 🐹 — лучший смп сервер хомячков • Айпи: tt.xomasmp.fun • Версия: 1.21.11
+</footer>
+
+<script>
+  // Твой старый скрипт для онлайна
+  fetch('https://api.mcsrvstat.us/3/tt.xomasmp.fun:25604')
+    .then(r => r.json())
+    .then(data => {
+      const el = document.getElementById('online');
+      if (data && data.online) el.textContent = data.players.online + '/' + data.players.max + ' 🟢';
+      else el.textContent = 'оффлайн 🔴';
+    })
+    .catch(() => document.getElementById('online').textContent = '—');
+</script>
+
+</body>
+</html>
