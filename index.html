@@ -1,10 +1,187 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <meta http-equiv="refresh" content="0; url=xomasmp.html" />
-    <title>Перенаправление...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XomaSMP | Соглашение</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #10101c;
+            color: #e8e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .gate-box {
+            background: #1a1a2c;
+            border: 2px solid #8000FF;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        h1 { color: #DDA0DD; margin-bottom: 10px; }
+        .server-info { color: #aaa; margin-bottom: 30px; font-size: 0.95rem; }
+        .server-info b { color: #fff; }
+        .agreement-text {
+            background: rgba(128, 0, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: left;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+        button {
+            background: #8000FF;
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            display: none; /* Скрыта по умолчанию */
+        }
+        button:hover { background: #9a33ff; }
+        button.active { display: inline-block; }
+        .footer-links { margin-top: 25px; font-size: 0.8rem; color: #666; line-height: 1.8; }
+        .footer-links a { color: #DDA0DD; text-decoration: none; cursor: pointer; }
+        .footer-links a:hover { text-decoration: underline; }
+        .mojang-disclaimer { margin-top: 20px; font-size: 0.75rem; color: #555; }
+        /* Модальное окно для документов */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 100; }
+        .modal-content { background: #1a1a2c; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; text-align: left; position: relative; }
+        .modal-content h3 { color: #DDA0DD; margin-top: 0; }
+        .modal-content .close { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #aaa; }
+    </style>
 </head>
 <body>
-    <p>Если перенаправление не сработало, <a href="xomasmp.html">нажмите сюда</a>.</p>
+
+<div class="gate-box">
+    <h1>XomaSMP</h1>
+    <div class="server-info">
+        IP: <b>tt.xomasmp.fun</b> | Версия: <b>1.21.11</b>
+    </div>
+
+    <div class="agreement-text">
+        Чтобы перейти на основной сайт, где вся информация, вы должны ознакомиться и согласиться с нашими правилами и политикой конфиденциальности.
+    </div>
+
+    <div class="checkbox-container">
+        <input type="checkbox" id="agreeCheck">
+        <label for="agreeCheck">Принимаю</label>
+    </div>
+
+    <button id="enterBtn">Войти на сайт</button>
+
+    <div class="footer-links">
+        <div>
+            <a onclick="openDoc('terms')">Пользовательское соглашение</a> | 
+            <a onclick="openDoc('refund')">Политика безопасности и возврата</a> | 
+            <a onclick="openDoc('privacy')">Политика конфиденциальности</a>
+        </div>
+        <div class="mojang-disclaimer">
+            XOMASMP Не связан с Mojang AB<br>
+            Коммерческая деятельность проекта соответствует политике Mojang AB
+        </div>
+    </div>
+</div>
+
+<!-- Модальные окна -->
+<div class="modal" id="docModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeDoc()">&times;</span>
+        <div id="docContent"></div>
+    </div>
+</div>
+
+<script>
+    const checkbox = document.getElementById('agreeCheck');
+    const btn = document.getElementById('enterBtn');
+
+    // Показ кнопки при галочке
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // Переход на основной сайт
+    btn.addEventListener('click', function() {
+        if (checkbox.checked) {
+            window.location.href = 'main.html'; // <--- Ссылка на основной сайт
+        }
+    });
+
+    // Документы (упрощённые тексты)
+    const docs = {
+        terms: `
+            <h3>Пользовательское соглашение</h3>
+            <p><b>1. Общие положения</b><br>
+            Используя сервер XomaSMP и его сайт, вы соглашаетесь с данными условиями. Сервер предоставляется «как есть». Администрация не несёт ответственности за возможные сбои, потерю игровых данных или ущерб, возникший в результате игры.</p>
+            <p><b>2. Правила поведения</b><br>
+            Запрещено использование читов, оскорбление других игроков, распространение запрещённого контента. Администрация вправе выдать блокировку за нарушение правил без предварительного уведомления.</p>
+            <p><b>3. Донат</b><br>
+            Добровольные пожертвования идут на поддержку сервера. Приобретённые виртуальные предметы и привилегии не подлежат возврату и не могут быть обменены на реальные деньги.</p>
+            <p><b>4. Интеллектуальная собственность</b><br>
+            Все игровые материалы (постройки, плагины) являются собственностью их создателей. Копирование контента сервера без разрешения запрещено.</p>
+        `,
+        refund: `
+            <h3>Политика безопасности и возврата</h3>
+            <p><b>1. Возврат средств</b><br>
+            Поскольку донат является добровольным пожертвованием, возврат средств за уже оказанные услуги (привилегии, предметы) не производится. Исключение: если услуга не была оказана по технической вине сервера.</p>
+            <p><b>2. Безопасность</b><br>
+            Мы принимаем меры для защиты данных, но не гарантируем абсолютную безопасность. Не передавайте свой пароль третьим лицам. Администрация никогда не запрашивает пароль.</p>
+            <p><b>3. Блокировки</b><br>
+            В случае блокировки за нарушение правил, средства за донат не возвращаются.</p>
+        `,
+        privacy: `
+            <h3>Политика конфиденциальности</h3>
+            <p><b>1. Какие данные мы собираем</b><br>
+            Мы можем собирать ваш IP-адрес, никнейм, UUID и адрес электронной почты (при регистрации) для обеспечения работы сервера и связи с вами.</p>
+            <p><b>2. Как мы используем данные</b><br>
+            Данные используются исключительно для администрирования сервера, борьбы с читерами и улучшения качества игры. Мы не продаём и не передаём ваши данные третьим лицам, кроме случаев, предусмотренных законом.</p>
+            <p><b>3. Cookies</b><br>
+            Сайт может использовать cookies для сохранения ваших настроек (например, темы оформления).</p>
+        `
+    };
+
+    function openDoc(type) {
+        document.getElementById('docContent').innerHTML = docs[type];
+        document.getElementById('docModal').style.display = 'flex';
+    }
+
+    function closeDoc() {
+        document.getElementById('docModal').style.display = 'none';
+    }
+
+    // Закрытие по клику вне окна
+    window.onclick = function(event) {
+        const modal = document.getElementById('docModal');
+        if (event.target === modal) closeDoc();
+    }
+</script>
+
 </body>
 </html>
