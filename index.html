@@ -1,186 +1,652 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XomaSMP | Соглашение</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #10101c;
-            color: #e8e8f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .gate-box {
-            background: #1a1a2c;
-            border: 2px solid #8000FF;
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-        h1 { color: #DDA0DD; margin-bottom: 10px; }
-        .server-info { color: #aaa; margin-bottom: 30px; font-size: 0.95rem; }
-        .server-info b { color: #fff; }
-        .agreement-text {
-            background: rgba(128, 0, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: left;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #ccc;
-            margin-bottom: 25px;
-        }
-        .checkbox-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
-        input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
-        button {
-            background: #8000FF;
-            color: #fff;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            display: none; /* Скрыта по умолчанию */
-        }
-        button:hover { background: #9a33ff; }
-        button.active { display: inline-block; }
-        .footer-links { margin-top: 25px; font-size: 0.8rem; color: #666; line-height: 1.8; }
-        .footer-links a { color: #DDA0DD; text-decoration: none; cursor: pointer; }
-        .footer-links a:hover { text-decoration: underline; }
-        .mojang-disclaimer { margin-top: 20px; font-size: 0.75rem; color: #555; }
-        /* Модальное окно для документов */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 100; }
-        .modal-content { background: #1a1a2c; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; text-align: left; position: relative; }
-        .modal-content h3 { color: #DDA0DD; margin-top: 0; }
-        .modal-content .close { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #aaa; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xomaSMP 🐹 — лучший смп сервер хомячков</title>
+<style>
+  :root {
+    --bg: #10101c;
+    --cube: rgba(255,255,255,0.03);
+    --cube-border: rgba(255,255,255,0.05);
+    --text: #e8e8f0;
+    --muted: #9a9ab0;
+    --accent: #f7af1b;
+    --card: #1a1a2c;
+    --card-border: #2a2a44;
+    --card-hover: #232340;
+    --shadow: rgba(0,0,0,0.4);
+  }
+  body.light {
+    --bg: #f2f2f5;
+    --cube: rgba(0,0,0,0.04);
+    --cube-border: rgba(0,0,0,0.07);
+    --text: #22222e;
+    --muted: #5a5a70;
+    --accent: #d4880f;
+    --card: #ffffff;
+    --card-border: #dddddd;
+    --card-hover: #f5f5f8;
+    --shadow: rgba(0,0,0,0.1);
+  }
+  body.neon {
+    --bg: #15001f;
+    --cube: rgba(255,0,255,0.05);
+    --cube-border: rgba(0,255,255,0.08);
+    --text: #f0e0ff;
+    --muted: #b080d0;
+    --accent: #00ffc8;
+    --card: #200030;
+    --card-border: #a020f0;
+    --card-hover: #300045;
+    --shadow: rgba(160,0,255,0.3);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.4s, color 0.4s;
+  }
+
+  #cubes {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(var(--cube-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--cube-border) 1px, transparent 1px),
+      linear-gradient(var(--cube), var(--cube)),
+      linear-gradient(90deg, var(--cube), var(--cube));
+    background-size: 60px 60px, 60px 60px, 60px 60px, 60px 60px;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .logo h1 { margin: 0; font-size: 34px; letter-spacing: 1px; }
+  .logo .slogan { margin-top: 4px; font-size: 14px; color: var(--accent); }
+  .server-info { text-align: right; font-size: 15px; line-height: 1.7; }
+  .server-info .ip {
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: underline dotted;
+  }
+  .theme-switcher { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+  .theme-switcher button {
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .theme-switcher button:hover { background: var(--card-hover); }
+  .theme-switcher button.active { border-color: var(--accent); color: var(--accent); }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 20px 30px 60px; }
+
+  .windows {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .win {
+    background: var(--card);
+    border: 2px solid var(--card-border);
+    border-radius: 14px;
+    padding: 24px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 4px 15px var(--shadow);
+  }
+  .win:hover { transform: translateY(-4px); background: var(--card-hover); }
+  .win h3 { margin: 0 0 14px; font-size: 20px; }
+  .win ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; line-height: 1.9; }
+
+  section {
+    background: var(--card);
+    border: 2px solid var(--card-border);
+    border-radius: 14px;
+    padding: 26px 30px;
+    margin-top: 35px;
+    box-shadow: 0 4px 15px var(--shadow);
+    scroll-margin-top: 20px;
+  }
+  section h2 { margin: 0 0 18px; font-size: 26px; color: var(--accent); }
+  section h3 { margin: 24px 0 10px; font-size: 19px; }
+  section p, section li { line-height: 1.7; }
+  section ul, section ol { line-height: 1.9; }
+  .muted { color: var(--muted); }
+
+  .rule {
+    padding: 10px 14px;
+    border-left: 4px solid var(--accent);
+    background: rgba(128,128,128,0.08);
+    border-radius: 0 8px 8px 0;
+    margin: 8px 0;
+  }
+
+  .price-card {
+    background: var(--card-hover);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .price-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .price-card b.name { font-size: 17px; color: var(--accent); }
+  .price-card .price { float: right; font-weight: bold; font-size: 17px; }
+  .price-card p { margin: 6px 0 0; }
+
+  .donat-item {
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background: var(--card-hover);
+    margin: 8px 0;
+    transition: border-color 0.15s;
+  }
+  .donat-item:hover { border-color: var(--accent); }
+
+  .private-chunk-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: default;
+  }
+  .private-chunk-item .buy-chunk {
+    flex: 1;
+    cursor: pointer;
+  }
+  .help-btn {
+    flex: 0 0 auto;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .help-btn:hover { background: var(--accent); color: var(--bg); }
+
+  .news-item {
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: var(--card-hover);
+    border: 1px solid var(--card-border);
+    margin: 10px 0;
+  }
+  .news-item .date { color: var(--muted); font-size: 13px; }
+
+  footer { text-align: center; padding: 30px; color: var(--muted); font-size: 14px; }
+  a { color: var(--accent); }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 28px 30px;
+    box-shadow: 0 10px 40px var(--shadow);
+    position: relative;
+  }
+  .modal h3 { margin: 0 0 14px; color: var(--accent); font-size: 20px; }
+  .modal .close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 26px;
+    cursor: pointer;
+    color: var(--muted);
+    background: none;
+    border: none;
+  }
+  .modal .close:hover { color: var(--accent); }
+  .modal pre {
+    white-space: pre-wrap;
+    background: rgba(128,128,128,0.12);
+    padding: 14px;
+    border-radius: 8px;
+    line-height: 1.7;
+  }
+  .modal .copy-btn {
+    margin-top: 16px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .modal .copy-btn:hover { background: var(--accent); color: var(--bg); }
+
+  #back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px var(--shadow);
+    display: none;
+    z-index: 50;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  #back-to-top:hover { transform: translateY(-3px); }
+  #back-to-top.show { display: block; }
+
+  @media (max-width: 600px) {
+    .logo h1 { font-size: 26px; }
+    header { padding: 15px; }
+    .container { padding: 15px; }
+    .server-info { text-align: left; }
+    .theme-switcher { justify-content: flex-start; }
+    .modal { padding: 20px 18px; }
+    .modal pre { font-size: 12px; }
+  }
+</style>
 </head>
 <body>
 
-<div class="gate-box">
-    <h1>XomaSMP</h1>
-    <div class="server-info">
-        IP: <b>tt.xomasmp.fun</b> | Версия: <b>1.21.11</b>
+<div id="cubes"></div>
+
+<header>
+  <div class="logo">
+    <h1>xomaSMP <span class="pick">⛏️🐹</span></h1>
+    <div class="slogan">лучший смп сервер хомячков</div>
+  </div>
+  <div class="server-info">
+    <div>Онлайн: <b id="online">…</b></div>
+    <div>Айпи: <span class="ip" id="ip" title="Нажми, чтобы скопировать">tt.xomasmp.fun</span></div>
+    <div>Версия: 1.21.11 (Java Edition)</div>
+    <div class="theme-switcher">
+      <button data-theme="" id="btn-dark" class="active">🌙 Тёмная</button>
+      <button data-theme="light" id="btn-light">☀️ Светлая</button>
+      <button data-theme="neon" id="btn-neon">💜 Неон</button>
+    </div>
+    <div style="margin-top: 10px;">
+      <a href="index.html" style="font-size: 0.8rem; color: var(--muted); text-decoration: none; border-bottom: 1px dashed var(--muted);">← Вернуться к соглашению</a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="windows">
+    <div class="win" onclick="go('rules')">
+      <h3>📜 Правила сервера</h3>
+      <ul>
+        <li>Правила</li>
+        <li>Администрация</li>
+        <li>Справка по командам</li>
+        <li>Доп. инфа</li>
+      </ul>
+    </div>
+    <div class="win" onclick="go('gameplay')">
+      <h3>🎮 Геймплей</h3>
+      <ul>
+        <li>Почётные игроки</li>
+        <li>Вайпы</li>
+        <li>Описание сервера</li>
+      </ul>
+    </div>
+    <div class="win" onclick="go('donate')">
+      <h3>💎 Донат магазин</h3>
+      <ul>
+        <li>Донат привилегии</li>
+        <li>Доп. донат</li>
+        <li>Призы</li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="rules">
+    <h2>1. Правила сервера</h2>
+
+    <h3>📋 Правила сервера</h3>
+    <p>«Заходя на игровой сервер, Вы автоматически соглашаетесь с данным сводом правил. Игрок в полной мере и единолично несёт ответственность за сохранность своего аккаунта и за любые совершаемые на нём действия. Правила могут быть изменены Администрацией в любой момент.»</p>
+
+    <h3>⚖️ Утрата ресурсов и апелляция</h3>
+    <p>Администрация не обязана возвращать ресурсы, утерянные в ходе игрового процесса (исключение: подтвержденные баги/недоработки). Обжаловать действия модераторов можно в поддержке строго в течение 7 дней с момента наказания.</p>
+
+    <h3>⚡ Важно (проверки на читы)</h3>
+    <p>На нашем проекте есть проверки на читы, и в случае отказа вы получаете бан навсегда. НО админ не обязан делать проверку и просто может забанить.</p>
+
+    <h3>🔴 Основные правила</h3>
+    <div class="rule"><b>1.1.1 Обман при сделках</b> — запрещён любой обман во время обменов/сделок. Сделка считается завершённой только когда оба получили предметы. Бан 1–7 дней.</div>
+    <div class="rule"><b>1.1.2 Срыв чужой сделки</b> — запрещено вмешиваться в торговые сделки других. Бан 1–3 дня.</div>
+    <div class="rule"><b>1.2 Систематические нарушения</b> — регулярные нарушения правил. Бан от 1 дня до вечного.</div>
+    <div class="rule"><b>1.3 Обман администрации</b> — предоставление ложных сведений. Бан 30 дней.</div>
+
+    <h3>🚫 Запрещённые действия (БВР)</h3>
+    <div class="rule"><b>2.0 Обход блокировок</b> — вход через твинк во время бана. Бан твинка навсегда + 30 дней основе.</div>
+    <div class="rule"><b>2.1 Выдача себя за администрацию</b> — бан 1–30 дней.</div>
+    <div class="rule"><b>2.2 Использование читов</b> — чит-клиенты, автокликеры, X-Ray. После 3 блокировок — вечный бан. Бан навсегда.</div>
+    <p>✅ <b>Разрешено:</b> AutoFish, ElytraSwap, Авто-Тотем, Быстрый лут, Быстрый выброс.</p>
+    <div class="rule"><b>2.3 Запрещённые моды</b> — CrystalOptimizer, моды для SEED и др. Бан 10 дней → вечный.</div>
+    <div class="rule"><b>2.4 Багоюз</b> — использование багов. Бан навсегда.</div>
+    <div class="rule"><b>2.5 Дюп предметов</b> — бан навсегда.</div>
+    <div class="rule"><b>2.6 Сокрытие багов</b> — бан навсегда.</div>
+    <div class="rule"><b>2.7 Содействие софтеру</b> — игра с читером. Бан 1 день.</div>
+    <div class="rule"><b>2.8 Распространение читов</b> — бан навсегда.</div>
+    <div class="rule"><b>2.9 Попрошайничество</b> — бан 1 час.</div>
+    <div class="rule"><b>2.10 Постройка лаг-машин</b> — бан навсегда.</div>
+    <div class="rule"><b>2.11 Доксинг и сватинг</b> — бан навсегда.</div>
+
+    <h3>💬 Правила чата</h3>
+    <div class="rule"><b>3.0 Оскорбления игроков</b> — бан 1 час → 30 дней.</div>
+    <div class="rule"><b>3.1 Грубость в сторону администрации</b> — бан 30 дней → вечный.</div>
+    <div class="rule"><b>3.2 Реклама сторонних ресурсов</b> — бан 1–30 дней / вечный.</div>
+    <div class="rule"><b>3.3 Флуд и спам</b> — 10+ сообщений. Кик → бан 1 час.</div>
+    <div class="rule"><b>3.4 Оскорбление сервера</b> — бан 30 дней → вечный.</div>
+
+    <h3>👑 Администрация</h3>
+    <ul>
+      <li><b>Создатель:</b> MrXomaOff</li>
+      <li><b>Модераторы:</b> Danil2025</li>
+      <li><b>Блогеры:</b> нет(</li>
+      <li><b>Строители:</b> пока нету</li>
+      <li><b>ТГ канал:</b> <a href="https://t.me/xomasmp" target="_blank">@xomasmp</a></li>
+      <li><b>ТГ поддержки:</b> <a href="https://t.me/mrxomaoff" target="_blank">@mrxomaoff</a></li>
+    </ul>
+
+    <h3>⌨️ Справка по командам</h3>
+    <ul>
+      <li><code>warp rtp</code> — телепорт</li>
+      <li><code>sethome</code> — точка дома</li>
+      <li><code>delhome</code> — удалить точку дома</li>
+      <li><code>home (название)</code> — телепорт на дом</li>
+    </ul>
+
+    <h3>ℹ️ Доп. инфа</h3>
+    <p class="muted">(пока нету) Здесь будут важные оповещения и обновления от администрации.</p>
+  </section>
+
+  <section id="gameplay">
+    <h2>2. Геймплей</h2>
+
+    <h3>🏅 Почётные игроки</h3>
+    <ul>
+      <li><b>Клан «Ахае»:</b></li>
+      <li>Bahha</li>
+      <li>carabaska</li>
+      <li>rusering</li>
+    </ul>
+
+    <h3>🔄 Вайпы</h3>
+    <p><b>Вайп №1 (глобальный вайп) — 28.08.26</b></p>
+    <p>Изменения:</p>
+    <ul>
+      <li>🏰 Спавн — стал более обширным и детализированным</li>
+      <li>🔄 Рестарт — обновили карты всех режимов, всё начали с 0</li>
+      <li>🏝️ Новый режим — Битва островов (подробнее на главной)</li>
+      <li>⚙️ Новые механики и плагины</li>
+    </ul>
+    <p><b>Вайп №2 (глобальный) — 4.10.26</b></p>
+    <p>Мы переделали сервер и теперь это смп.</p>
+    <div class="rule">
+      <p><b>Вайп №3 — 25.10.2026</b></p>
+      <p>Мы обновили карту, инвентари и позиции игроков.</p>
+    </div>
+    <p>📅 Следующий глобальный вайп планируется — <b>01.01.2027</b> (может и раньше).</p>
+
+    <h3>🐹 Описание сервера</h3>
+    <p>Очень уютный смп! 🐹</p>
+    <p>Наш сервер отличается от других серверов:</p>
+    <ol>
+      <li>Владелец — милый хомячок</li>
+      <li>Добрые игроки</li>
+      <li>Почти нет доната (только титулы для уюта)</li>
+      <li>Нет непонятных команд</li>
+      <li>Еженедельно проводятся ивенты</li>
+    </ol>
+    <p>Хочешь поиграть? Заходи на версии 1.21.11!</p>
+    <p>Наш ТГ канал: <a href="https://t.me/xomasmp" target="_blank">@xomasmp</a>, а также <a href="https://t.me/slonndonat" target="_blank">@slonndonat</a></p>
+    <p>Владелец: <a href="https://t.me/MrXomaOff" target="_blank">@MrXomaOff</a></p>
+  </section>
+
+  <section id="donate">
+    <h2>3. Донат магазин</h2>
+    <p class="muted">Нажми на любой донат, чтобы купить его 👇</p>
+
+    <h3>💎 Донат привилегии</h3>
+
+    <div class="price-card" onclick="buy('Mini hamster', '29 рублей')">
+      <span class="price">29 ₽</span>
+      <b class="name">Mini hamster</b>
+      <p>5 точек дома, уникальный титул, уважуха от админа.</p>
+    </div>
+    <div class="price-card" onclick="buy('Big hamster', '60 рублей')">
+      <span class="price">60 ₽</span>
+      <b class="name">Big hamster</b>
+      <p>7 точек дома, уникальный титул, место на доске почёта, уважуха от админа.</p>
+    </div>
+    <div class="price-card" onclick="buy('Litle xoma', '100 рублей')">
+      <span class="price">100 ₽</span>
+      <b class="name">Litle xoma</b>
+      <p>9 точек дома, уникальный титул, место на доске почёта, уважуха от админа, рандом донат предмет.</p>
+    </div>
+    <div class="price-card" onclick="buy('Старший хомяк', '180 рублей')">
+      <span class="price">180 ₽</span>
+      <b class="name">Старший хомяк</b>
+      <p>10 точек дома, уникальный титул, место на доске почёта, уважуха от админа, 3 рандом донат предмета, личный чат с админом, тп к любому игроку (1 раз).</p>
+    </div>
+    <div class="price-card" onclick="buy('XOMA', '240 рублей')">
+      <span class="price">240 ₽</span>
+      <b class="name">XOMA</b>
+      <p>15 точек дома, уникальный титул, место на доске почёта, уважуха от админа, 5 рандом донат предметов, личный чат с админом, тп к любому игроку (5 раз), возможность стать хелпером.</p>
     </div>
 
-    <div class="agreement-text">
-        Чтобы перейти на основной сайт, где вся информация, вы должны ознакомиться и согласиться с нашими правилами и политикой конфиденциальности.
+    <p><b>Донат привилегии покупаются НАВСЕГДА</b>, но донат из кейса — не навсегда.</p>
+
+    <h3>🛒 Доп. донат</h3>
+    <div class="donat-item" onclick="buy('Разбан', '200 рублей')"><b>Разбан</b> — 200 ₽ (только если у вас не БВР)</div>
+    <div class="donat-item" onclick="buy('Уникальный титул на ваш запрос', '50 рублей')"><b>Уникальный титул на ваш запрос</b> — 50 ₽</div>
+    <div class="donat-item" onclick="buy('Ключ от кейса с рандом донат предметами', '100 рублей')"><b>Ключ от кейса с рандом донат предметами</b> — 100 ₽</div>
+    <div class="donat-item" onclick="buy('Ключ от рандом привилегии', '70 рублей')"><b>Ключ от рандом привилегии</b> — 70 ₽</div>
+    <div class="donat-item" onclick="buy('Рандомный титул', '20 рублей')"><b>Рандомный титул</b> — 20 ₽</div>
+    <div class="donat-item" onclick="buy('Место на доске почёта (пожертвование)', 'любая сумма')"><b>Место на доске почёта (пожертвование)</b> — любая сумма</div>
+
+    <div class="donat-item private-chunk-item">
+      <span class="buy-chunk" onclick="buy('1 чанк привата', '50 рублей')"><b>1 чанк привата</b> — 50 ₽</span>
+      <button class="help-btn" type="button" aria-label="Справка о чанке привата" onclick="event.stopPropagation(); openHelp()">?</button>
     </div>
 
-    <div class="checkbox-container">
-        <input type="checkbox" id="agreeCheck">
-        <label for="agreeCheck">Принимаю</label>
-    </div>
+    <h3>🎁 Призы</h3>
+    <p>При победе в наших ивентах вы можете получать рандомные призы. Ивенты — раз в неделю.</p>
+  </section>
 
-    <button id="enterBtn">Войти на сайт</button>
-
-    <div class="footer-links">
-        <div>
-            <a onclick="openDoc('terms')">Пользовательское соглашение</a> | 
-            <a onclick="openDoc('refund')">Политика безопасности и возврата</a> | 
-            <a onclick="openDoc('privacy')">Политика конфиденциальности</a>
-        </div>
-        <div class="mojang-disclaimer">
-            XOMASMP Не связан с Mojang AB<br>
-            Коммерческая деятельность проекта соответствует политике Mojang AB
-        </div>
+  <section id="news">
+    <h2>4. Новости</h2>
+    <div class="news-item">
+      <div class="date">25.10.26</div>
+      <p>У нас прошёл <b>Вайп Номер 3</b>! Мы обновили карту, инвентари и позиции игроков.</p>
     </div>
+    <div class="news-item">
+      <div class="date">25.10.26</div>
+      <p>Мы немного изменили структуру сайта и добавили страницу соглашения.</p>
+    </div>
+    <div class="news-item">
+      <div class="date">18.10.26</div>
+      <p>Наш сайт теперь общедоступен! 🎉</p>
+    </div>
+    <div class="news-item">
+      <div class="date">17.10.26</div>
+      <p>Мы сделали хороший античит 🛡️</p>
+    </div>
+    <div class="news-item">
+      <div class="date">15.10.26</div>
+      <p>Мы создали сайт для сервера 🎉</p>
+    </div>
+  </section>
+
 </div>
 
-<!-- Модальные окна -->
-<div class="modal" id="docModal">
-    <div class="modal-content">
-        <span class="close" onclick="closeDoc()">&times;</span>
-        <div id="docContent"></div>
-    </div>
+<footer>
+  xomaSMP 🐹 — лучший смп сервер хомячков • Айпи: tt.xomasmp.fun • Версия: 1.21.11 • ТГ: <a href="https://t.me/xomasmp" target="_blank">@xomasmp</a>
+</footer>
+
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">↑</button>
+
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <button class="close" onclick="closeModal()">×</button>
+    <h3>⚠️ Внимание!</h3>
+    <p>Вы покупаете донат с названием: <b id="m-name" style="color:var(--accent)"></b></p>
+    <p>Для покупки данного доната вы должны скинуть необходимую сумму на номер телефона:</p>
+    <p><b><a href="tel:+79136430067">+7 913 643 00 67</a> (ТИНЬКОФФ!)</b></p>
+    <p>После написать в поддержку: <b>@MrXomaOff</b> сообщение:</p>
+    <p><i>(обязательно прикреплять фото)</i></p>
+    <pre id="m-template"></pre>
+    <p>После оплаты в субботу или воскресенье поддержка свяжется с вами и выдаст донат.</p>
+    <p>Для пожертвования просто можете перевести на номер любую сумму и приложить ник.</p>
+    <button class="copy-btn" onclick="copyTemplate()">📋 Скопировать сообщение</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="help-overlay" onclick="if(event.target===this) closeHelp()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="help-title">
+    <button class="close" onclick="closeHelp()" aria-label="Закрыть">×</button>
+    <h3 id="help-title">СПРАВКА</h3>
+    <p>На спавне при покупке данной услуги вы получаете чанк привата, то есть отдельное место, где только вы сможете что-либо делать. Взорвать и повредить его нельзя.</p>
+  </div>
 </div>
 
 <script>
-    const checkbox = document.getElementById('agreeCheck');
-    const btn = document.getElementById('enterBtn');
+  function go(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
 
-    // Показ кнопки при галочке
-    checkbox.addEventListener('change', function() {
-        if (this.checked) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+  const body = document.body;
+  const buttons = document.querySelectorAll('.theme-switcher button');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      body.className = btn.dataset.theme;
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      try { localStorage.setItem('xomaTheme', btn.dataset.theme); } catch(e) {}
+    });
+  });
+  try {
+    const saved = localStorage.getItem('xomaTheme');
+    if (saved) {
+      body.className = saved;
+      buttons.forEach(b => b.classList.toggle('active', b.dataset.theme === saved));
+    }
+  } catch(e) {}
+
+  document.getElementById('ip').addEventListener('click', function () {
+    navigator.clipboard.writeText('tt.xomasmp.fun').then(() => {
+      const old = this.textContent;
+      this.textContent = 'Скопировано!';
+      setTimeout(() => { this.textContent = old; }, 1200);
+    });
+  });
+
+  fetch('https://api.mcsrvstat.us/3/tt.xomasmp.fun:25604')
+    .then(r => r.json())
+    .then(data => {
+      const el = document.getElementById('online');
+      if (data && data.online) {
+        el.textContent = data.players.online + '/' + data.players.max + ' 🟢';
+      } else {
+        el.textContent = 'сервер перезагружается ⏳';
+      }
+    })
+    .catch(() => {
+      document.getElementById('online').textContent = '—';
     });
 
-    // Переход на основной сайт
-    btn.addEventListener('click', function() {
-        if (checkbox.checked) {
-            window.location.href = 'main.html'; // <--- Ссылка на основной сайт
-        }
+  let currentTemplate = '';
+
+  function buy(name, sum) {
+    document.getElementById('m-name').textContent = name;
+    currentTemplate =
+      'Привет!\n' +
+      'купил донат: ' + name + '\n' +
+      'Сумма: ' + sum + '\n' +
+      'Ник из маина (БЕЗ ОШИБОК)\n\n' +
+      'Оплатил в: (время)';
+    document.getElementById('m-template').textContent = currentTemplate;
+    document.getElementById('modal-overlay').classList.add('show');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('show');
+  }
+
+  function openHelp() {
+    document.getElementById('help-overlay').classList.add('show');
+  }
+
+  function closeHelp() {
+    document.getElementById('help-overlay').classList.remove('show');
+  }
+
+  function copyTemplate() {
+    navigator.clipboard.writeText(currentTemplate).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent = '✅ Скопировано!';
+      setTimeout(() => { btn.textContent = '📋 Скопировать сообщение'; }, 1500);
     });
+  }
 
-    // Документы (упрощённые тексты)
-    const docs = {
-        terms: `
-            <h3>Пользовательское соглашение</h3>
-            <p><b>1. Общие положения</b><br>
-            Используя сервер XomaSMP и его сайт, вы соглашаетесь с данными условиями. Сервер предоставляется «как есть». Администрация не несёт ответственности за возможные сбои, потерю игровых данных или ущерб, возникший в результате игры.</p>
-            <p><b>2. Правила поведения</b><br>
-            Запрещено использование читов, оскорбление других игроков, распространение запрещённого контента. Администрация вправе выдать блокировку за нарушение правил без предварительного уведомления.</p>
-            <p><b>3. Донат</b><br>
-            Добровольные пожертвования идут на поддержку сервера. Приобретённые виртуальные предметы и привилегии не подлежат возврату и не могут быть обменены на реальные деньги.</p>
-            <p><b>4. Интеллектуальная собственность</b><br>
-            Все игровые материалы (постройки, плагины) являются собственностью их создателей. Копирование контента сервера без разрешения запрещено.</p>
-        `,
-        refund: `
-            <h3>Политика безопасности и возврата</h3>
-            <p><b>1. Возврат средств</b><br>
-            Поскольку донат является добровольным пожертвованием, возврат средств за уже оказанные услуги (привилегии, предметы) не производится. Исключение: если услуга не была оказана по технической вине сервера.</p>
-            <p><b>2. Безопасность</b><br>
-            Мы принимаем меры для защиты данных, но не гарантируем абсолютную безопасность. Не передавайте свой пароль третьим лицам. Администрация никогда не запрашивает пароль.</p>
-            <p><b>3. Блокировки</b><br>
-            В случае блокировки за нарушение правил, средства за донат не возвращаются.</p>
-        `,
-        privacy: `
-            <h3>Политика конфиденциальности</h3>
-            <p><b>1. Какие данные мы собираем</b><br>
-            Мы можем собирать ваш IP-адрес, никнейм, UUID и адрес электронной почты (при регистрации) для обеспечения работы сервера и связи с вами.</p>
-            <p><b>2. Как мы используем данные</b><br>
-            Данные используются исключительно для администрирования сервера, борьбы с читерами и улучшения качества игры. Мы не продаём и не передаём ваши данные третьим лицам, кроме случаев, предусмотренных законом.</p>
-            <p><b>3. Cookies</b><br>
-            Сайт может использовать cookies для сохранения ваших настроек (например, темы оформления).</p>
-        `
-    };
-
-    function openDoc(type) {
-        document.getElementById('docContent').innerHTML = docs[type];
-        document.getElementById('docModal').style.display = 'flex';
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeModal();
+      closeHelp();
     }
+  });
 
-    function closeDoc() {
-        document.getElementById('docModal').style.display = 'none';
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTop.classList.add('show');
+    } else {
+      backToTop.classList.remove('show');
     }
-
-    // Закрытие по клику вне окна
-    window.onclick = function(event) {
-        const modal = document.getElementById('docModal');
-        if (event.target === modal) closeDoc();
-    }
+  });
 </script>
 
 </body>
