@@ -255,7 +255,6 @@
   }
   .modal .copy-btn:hover { background: var(--accent); color: var(--bg); }
 
-  /* Кнопка "Наверх" */
   #back-to-top {
     position: fixed;
     bottom: 20px;
@@ -305,6 +304,9 @@
       <button data-theme="" id="btn-dark" class="active">🌙 Тёмная</button>
       <button data-theme="light" id="btn-light">☀️ Светлая</button>
       <button data-theme="neon" id="btn-neon">💜 Неон</button>
+    </div>
+    <div style="margin-top: 10px;">
+      <a href="index.html" style="font-size: 0.8rem; color: var(--muted); text-decoration: none; border-bottom: 1px dashed var(--muted);">← Вернуться к соглашению</a>
     </div>
   </div>
 </header>
@@ -382,7 +384,7 @@
     <h3>👑 Администрация</h3>
     <ul>
       <li><b>Создатель:</b> MrXomaOff</li>
-      <li><b>Модераторы:</b> нет</li>
+      <li><b>Модераторы:</b> Danil2025</li>
       <li><b>Блогеры:</b> нет(</li>
       <li><b>Строители:</b> пока нету</li>
       <li><b>ТГ канал:</b> <a href="https://t.me/xomasmp" target="_blank">@xomasmp</a></li>
@@ -405,7 +407,12 @@
     <h2>2. Геймплей</h2>
 
     <h3>🏅 Почётные игроки</h3>
-    <ul><li>bahha</li></ul>
+    <ul>
+      <li><b>Клан «Ахае»:</b></li>
+      <li>Bahha</li>
+      <li>carabaska</li>
+      <li>rusering</li>
+    </ul>
 
     <h3>🔄 Вайпы</h3>
     <p><b>Вайп №1 (глобальный вайп) — 28.08.26</b></p>
@@ -418,7 +425,11 @@
     </ul>
     <p><b>Вайп №2 (глобальный) — 4.10.26</b></p>
     <p>Мы переделали сервер и теперь это смп.</p>
-    <p>📅 Следующий глобальный вайп планируется — <b>01.01.2027</b>.</p>
+    <div class="rule">
+      <p><b>Вайп №3 — 25.10.2026</b></p>
+      <p>Мы обновили карту, инвентари и позиции игроков.</p>
+    </div>
+    <p>📅 Следующий глобальный вайп планируется — <b>01.01.2027</b> (может и раньше).</p>
 
     <h3>🐹 Описание сервера</h3>
     <p>Очень уютный смп! 🐹</p>
@@ -489,6 +500,14 @@
   <section id="news">
     <h2>4. Новости</h2>
     <div class="news-item">
+      <div class="date">25.10.26</div>
+      <p>У нас прошёл <b>Вайп Номер 3</b>! Мы обновили карту, инвентари и позиции игроков.</p>
+    </div>
+    <div class="news-item">
+      <div class="date">25.10.26</div>
+      <p>Мы немного изменили структуру сайта и добавили страницу соглашения.</p>
+    </div>
+    <div class="news-item">
       <div class="date">18.10.26</div>
       <p>Наш сайт теперь общедоступен! 🎉</p>
     </div>
@@ -508,10 +527,8 @@
   xomaSMP 🐹 — лучший смп сервер хомячков • Айпи: tt.xomasmp.fun • Версия: 1.21.11 • ТГ: <a href="https://t.me/xomasmp" target="_blank">@xomasmp</a>
 </footer>
 
-<!-- Кнопка "Наверх" -->
 <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">↑</button>
 
-<!-- ОКНО ПОКУПКИ -->
 <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this) closeModal()">
   <div class="modal">
     <button class="close" onclick="closeModal()">×</button>
@@ -528,7 +545,6 @@
   </div>
 </div>
 
-<!-- ОКНО СПРАВКИ -->
 <div class="modal-overlay" id="help-overlay" onclick="if(event.target===this) closeHelp()">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="help-title">
     <button class="close" onclick="closeHelp()" aria-label="Закрыть">×</button>
@@ -623,7 +639,6 @@
     }
   });
 
-  // Кнопка "Наверх"
   const backToTop = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
